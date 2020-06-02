@@ -39,6 +39,7 @@ let users = [
 //post function
 server.post("/api/users", (req, res) => {
   const newUser = req.body;
+  newUser.id = shortid.generate();
   // If the request body is missing the `name` or `bio` property:
   if (newUser.name === undefined || newUser.bio === undefined) {
     res.status(400).send("Please provide name and bio for the user.");
