@@ -20,17 +20,17 @@ server.listen(port, () => console.log(`\n == API on port ${port} == \n`));
 
 let users = [
   {
-    id: shortid.generate(), // hint: use the shortid npm package to generate it
+    id: "1", // hint: use the shortid npm package to generate it
     name: "Jane Doe", // String, required
     bio: "Not Tarzan's Wife, another Jane", // String, required
   },
   {
-    id: shortid.generate(), // hint: use the shortid npm package to generate it
+    id: 2, // hint: use the shortid npm package to generate it
     name: "John Doe", // String, required
     bio: "Not Tarzan's Brother, another John", // String, required
   },
   {
-    id: shortid.generate(), // hint: use the shortid npm package to generate it
+    id: 3, // hint: use the shortid npm package to generate it
     name: "Doe Doe", // String, required
     bio: "Not Tarzan's Cousin, another Doe", // String, required
   },
@@ -105,7 +105,7 @@ server.put("/api/users/:id", (req, res) => {
   const id = req.params.id;
   const getUser = users.filter((user) => user.id === id);
   // If the _user_ with the specified `id` is not found:
-  if (getUser.length === 0) {
+  if (getUser.length === undefined) {
     res.status(404).send("The user with the specified ID does not exist.");
   }
   // If the request body is missing the `name` or `bio` property:
@@ -113,12 +113,12 @@ server.put("/api/users/:id", (req, res) => {
     res.status(400).send("Please provide name and bio for the user.");
   }
   // If there's an error when updating the _user_:
-  if (newList.hasOwnProperty(req.body)) {
+  if (users.hasOwnProperty(req.body)) {
     res.status(500).send("The user information could not be modified.");
   }
   // If the user is found and the new information is valid:
-  let newList = users.filter((user) => user.id !== id);
-  newList.push(req.body);
+  const newUser = { id: id, name: req.body.name, bio: req.body.bio };
+  let newList = users.map((user) => (user.id !== id ? user : newUser));
   users = newList;
-  res.status(200).send(newList);
+  res.status(200).send(users);
 });
