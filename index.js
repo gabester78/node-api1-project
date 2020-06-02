@@ -20,17 +20,17 @@ server.listen(port, () => console.log(`\n == API on port ${port} == \n`));
 
 let users = [
   {
-    id: "1", // hint: use the shortid npm package to generate it
+    id: "1",
     name: "Jane Doe", // String, required
     bio: "Not Tarzan's Wife, another Jane", // String, required
   },
   {
-    id: 2, // hint: use the shortid npm package to generate it
+    id: "2",
     name: "John Doe", // String, required
     bio: "Not Tarzan's Brother, another John", // String, required
   },
   {
-    id: 3, // hint: use the shortid npm package to generate it
+    id: "3",
     name: "Doe Doe", // String, required
     bio: "Not Tarzan's Cousin, another Doe", // String, required
   },
